@@ -1,0 +1,20 @@
+{
+  "name": "simple-proxy",
+  "version": "1.0.0",
+  "description": "A simple http/https proxy server.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/Backiscute/simple-proxy"
+  },
+  "author": "Back <back@backthe.dev>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
