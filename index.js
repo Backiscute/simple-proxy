@@ -9,13 +9,14 @@ const server = express().disable("x-powered-by").enable("trust proxy").use(expre
 }))
 
 server.all("/:url", async (req, res, next) => {
-    if (AUTHORIZATION && req.headers.authorization !== AUTHORIZATION) return next()
+    if (AUTHORIZATION && req.headers["simple-proxy-authorization"] !== AUTHORIZATION) return next()
     try {
         if (!/^(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?\/[a-zA-Z0-9]{2,}$/.test(req.params.url)) return res.status(400).json({
             code: "ERR_BAD_URL",
             url: req.params.url
         })
         delete req.headers.host
+        delete req.headers["simple-proxy-authorization"]
         const response = await axios({
             url: req.params.url,
             method: req.method.toLowerCase(),
